@@ -1,4 +1,3 @@
-cat > ~/DevOps-Workspace/DevOps-Cloud_Computing/README.md << 'EOF'
 # Projeto DevOps - Azure & Cloud Computing
 
 Este repositório contém atividades práticas da disciplina de DevOps, desenvolvidas utilizando ambientes em nuvem através da Microsoft Azure e integração com o Visual Studio Code Web.
