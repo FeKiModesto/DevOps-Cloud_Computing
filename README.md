@@ -30,7 +30,7 @@ Implantação do sistema de transações bancárias **DimDim** na nuvem Azure ut
 | `05_aci-api-dotnet.sh` | Cria o container da API .NET |
 
 #### Arquitetura:
-```
+```bash
 ACR (moneyhub561810.azurecr.io)
 ├── mysql-dimdim:v1
 ├── api-dimdim:v1
@@ -61,7 +61,7 @@ Provisionamento de banco de dados relacional gerenciado na nuvem com alta dispon
 - Teste de failover manual e reversão
 
 #### Arquitetura:
-```
+```bash
 SQL Server Primário (southafricanorth)
 └── db-dimdim (Primary)
 ↕ replicação geográfica
@@ -72,8 +72,32 @@ SQL Server Secundário (westus2)
 
 ---
 
+### Aula03 — Azure App Service: Web App PaaS
+Deploy de aplicações web na nuvem usando Azure App Service, desde sites estáticos até aplicações Spring Boot.
+
+#### O que foi feito:
+- Registro do provider `Microsoft.Web`
+- Criação do **App Service Plan** `planSites` (SKU F1 — Free, Windows)
+- Criação do **Web App** `hello-rm561810` na região `brazilsouth`
+- Deploy de site HTML estático (`one-page`) via `az webapp up`
+- Atualização do Web App com novo site estático (`static-web-page-terrarium`)
+- Configuração do ambiente Java 17 no Web App
+- Clone e build do projeto **Spring Pet Clinic** com Maven
+- Deploy do `.jar` via `az webapp deploy`
+
+#### Arquitetura:
+```bash
+App Service Plan (planSites — Free F1)
+└── Web App hello-rm561810 (brazilsouth)
+├── Deploy 1: one-page (HTML estático)
+├── Deploy 2: terrarium (HTML estático)
+└── Deploy 3: spring-petclinic-3.3.0-SNAPSHOT.jar (Java 17)
+```
+
+---
+
 ## Tecnologias utilizadas
-- Microsoft Azure (ACR, ACI, Key Vault, Storage Account, SQL Database, SQL Server)
+- Microsoft Azure (ACR, ACI, Key Vault, Storage Account, SQL Database, SQL Server, App Service)
 - Docker
 - Visual Studio Code Web
 - Git / GitHub
@@ -81,7 +105,9 @@ SQL Server Secundário (westus2)
 - .NET
 - MySQL 8.0
 - Azure SQL Database (PaaS)
+- Azure App Service (PaaS)
 - Azure CLI / PowerShell
+- Maven
 
 ---
 
