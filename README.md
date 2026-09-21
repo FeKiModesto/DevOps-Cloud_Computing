@@ -96,6 +96,75 @@ App Service Plan (planSites — Free F1)
 
 ---
 
+### Aula04 — API Spring Boot x CI/CD Portal x Banco Oracle
+Desenvolvimento de uma API Spring Boot para controle de vagas de estacionamento, com deploy via Portal da Azure e CI/CD automático com GitHub Actions. A API consome um banco de dados Oracle hospedado na FIAP.
+
+**Repositório do Projeto:** [api-springboot-web-app](https://github.com/FeKiModesto/api-springboot-web-app)
+
+*O que foi feito:*
+- Criação da tabela tb_vagas e sequence SQ_TB_VAGAS no Oracle (SQL Developer)
+- Configuração do application.properties com as credenciais do banco Oracle
+- Criação do Web App api-vaga-rm561810 no Portal da Azure (Java 11, Windows, SKU F1)
+- Habilitação da Implantação Contínua com GitHub Actions no Portal
+- Autorização do Azure na conta do GitHub e seleção do repositório/branch
+- Habilitação da Autenticação Básica (SCM)
+- Criação de Secrets no GitHub (SPRING_DATASOURCE_URL, USERNAME, PASSWORD) para o build
+- Ajuste do workflow YAML para incluir as variáveis de ambiente no passo de build
+- Testes das operações GET, POST, PUT e DELETE via Postman
+- Verificação da persistência dos dados diretamente no Oracle
+- Limpeza do Grupo de Recursos e dos objetos do banco
+
+**Arquitetura:**
+```bash
+GitHub Actions (CI/CD)
+↓
+Azure Web App (api-vaga-rm561810) → Oracle DB (FIAP)
+```
+📄 **Script detalhado:** [aula04/script.md](https://github.com/FeKiModesto/DevOps-Cloud_Computing/blob/main/aula04/script.md)
+
+---
+
+### Aula05 — Front-end Spring x CI/CD Script x Banco Oracle / SQL Server
+Realização de dois projetos de Front-end com Spring MVC, com infraestrutura criada via Azure CLI (Cloud Shell) e deploy automatizado com GitHub Actions. Monitoramento com Application Insights.
+
+**Repositórios dos Projetos:** <br>
+[playmix-mvc — Gerenciamento de playlists e músicas (Oracle)](https://github.com/FeKiModesto/playmix-mvc) <br>
+[movtodimdim-Java-17 — Painel Admin do sistema DimDim (SQL Server)](https://github.com/FeKiModesto/movtodimdim-Java-17)
+
+*O que foi feito:*
+### Parte 1 - Playmix (Oracle):
+- Criação dos recursos via Azure CLI: Resource Group, Application Insights, App Service Plan (Linux F1), Web App (Java 17)
+- Configuração de variáveis de ambiente no Web App (URL do Oracle, usuário, senha, Application Insights)
+- Conexão do Web App com o Application Insights
+- Configuração do GitHub Actions para build e deploy automáticos
+- Criação de Secrets no GitHub e ajuste do workflow YAML
+- Testes da aplicação (CRUD de músicas e playlists)
+- Verificação do monitoramento no Application Insights
+- Limpeza do Grupo de Recursos e das tabelas no Oracle
+
+### Parte 2 - MovtoDimDim (SQL Server):
+- Criação do SQL Server e banco dimdimdb via script PowerShell (create-sql-server.ps1)
+- Criação das tabelas automaticamente via Sqlcmd
+- Deploy do Web App via script Bash (deploy-movtodimdim.sh)
+- Configuração de Secrets no GitHub para as credenciais do SQL Server
+- Ajuste do workflow YAML para incluir as variáveis de ambiente
+- Testes da aplicação (painel admin)
+- Análise do Mapa de Aplicações no Application Insights (Web App → SQL Server)
+- Limpeza do Grupo de Recursos
+
+**Arquitetura:**
+```bash
+GitHub Actions (CI/CD)
+↓
+Azure Web App (Linux F1) → Application Insights
+├── Playmix: Oracle DB (FIAP)
+└── MovtoDimDim: Azure SQL Database (PaaS)
+```
+
+📄 **Script detalhado:** [aula05/script.md](https://github.com/FeKiModesto/DevOps-Cloud_Computing/blob/main/aula05/script.md)
+
+---
+
 ## Tecnologias utilizadas
 - Microsoft Azure (ACR, ACI, Key Vault, Storage Account, SQL Database, SQL Server, App Service)
 - Docker
